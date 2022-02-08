@@ -1,12 +1,30 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background:red;
+}
+
+h1 {
+    font-family: cursive;
+    color: gold;
+    font-size: 40px;
 }
 
 #button-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
+    height: 50px;
+    padding: 20px 0px;
+    width: 700px;
+
+}
+
+button {
+    width: 75px;
+    font-size: large;
+    border-radius: 5px;
 }
 
 #container {
@@ -16,6 +34,7 @@ body {
     border: 3px solid black;
     height: 700px;
     width: 700px;
+    background-color: white;
 }
 
 .cell {
