@@ -1,15 +1,37 @@
 const container = document.querySelector('#container');
 const clearButton = document.querySelector('#clear-button');
 const resizeButton = document.querySelector('#resize-button');
+const blackButton = document.querySelector('#black-button');
 const colorButton = document.querySelector('#color-button');
 
 clearButton.addEventListener('click', clearGrid);
 resizeButton.addEventListener('click', resizeGrid);
-colorButton.addEventListener('click', etchCellColor)
+blackButton.addEventListener('click', etchCellBlack);
+colorButton.addEventListener('click', etchCellColor);
+
+const toggleButtons = document.querySelectorAll('.toggle-button');
+toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (document.querySelector('.active')) {
+            document.querySelector('.active').classList.remove('active');
+            btn.classList.add('active');
+        } else {
+            btn.classList.add('active');
+        }
+    })
+})
 
 createGrid(16, 16);
 etchCell();
 
+//checks to see what button is selected before invoking the black or color etch function
+function etchCell() {
+    if (colorButton.classList.contains('active')) {
+        etchCellColor();
+    } else {
+        etchCellBlack();
+    }
+}
 
 //create the grid 
 function createGrid (gridColumns, gridRows) {
@@ -29,10 +51,11 @@ function createGrid (gridColumns, gridRows) {
 
 //function that clears the grid
 function clearGrid () {
-    let etchedCells = document.querySelectorAll('.etched');
-    etchedCells.forEach(cell => {
-        cell.classList.remove('etched');
-    })
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => {
+            cell.setAttribute("style", "background-color:'' ");
+        });
+    etchCell();
 }
 
 //function that resizes the grid
@@ -53,11 +76,11 @@ function deleteGrid () {
 }
 
 //add function that permanently fills in the cell when the mouse hovers over it
-function etchCell () {
+function etchCellBlack () {
     let cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
         cell.addEventListener('mouseover', () => {
-            cell.classList.add('etched');
+            cell.setAttribute('style', 'background-color: black');
         });
     });
 }
