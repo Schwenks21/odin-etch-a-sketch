@@ -1,12 +1,15 @@
 const container = document.querySelector('#container');
 const clearButton = document.querySelector('#clear-button');
 const resizeButton = document.querySelector('#resize-button');
+const colorButton = document.querySelector('#color-button');
 
 clearButton.addEventListener('click', clearGrid);
 resizeButton.addEventListener('click', resizeGrid);
+colorButton.addEventListener('click', etchCellColor)
 
 createGrid(16, 16);
 etchCell();
+
 
 //create the grid 
 function createGrid (gridColumns, gridRows) {
@@ -59,3 +62,25 @@ function etchCell () {
     });
 }
 
+//function that creates a random color
+function getRandomColor () {
+    const colorR = Math.floor(Math.random() * 255);
+    const colorG = Math.floor(Math.random() * 255);
+    const colorB = Math.floor(Math.random() * 255);
+    return 'rgb(' + colorR + ',' + colorG + ',' + colorB + ')';
+}
+
+//create a function to color in random rgb colors when the mouseover event occurs at each cell event
+function etchCellColor () {
+    let cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => {
+        cell.addEventListener('mouseover', () => {
+            let newColor = getRandomColor();
+            cell.setAttribute('style', 'background-color:'+newColor);
+        })
+    })
+}
+
+//create function to color in shades of black that go from lighter to dark on every pass
+//when shade button is clicked, start by making the background color rbg(240/240/240) and on every pass
+//subtract 24 from the rgb values until it fets to black rbg(0,0,0) on the final pass
