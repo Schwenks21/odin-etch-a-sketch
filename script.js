@@ -1,4 +1,12 @@
 const container = document.querySelector('#container');
+const clearButton = document.querySelector('#clear-button');
+const resizeButton = document.querySelector('#resize-button');
+
+clearButton.addEventListener('click', clearGrid);
+resizeButton.addEventListener('click', resizeGrid);
+
+createGrid(16, 16);
+etchCell();
 
 //create the grid 
 function createGrid (gridColumns, gridRows) {
@@ -51,10 +59,3 @@ function etchCell () {
     });
 }
 
-window.onload = createGrid(16, 16);
-etchCell();
-
-const clearButton = document.querySelector('#clear-button');
-const resizeButton = document.querySelector('#resize-button');
-clearButton.addEventListener('click', clearGrid);
-resizeButton.addEventListener('click', resizeGrid);
